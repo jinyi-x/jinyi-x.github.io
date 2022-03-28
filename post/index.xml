@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 锦衣の妙♂妙♂屋</title>
-    <link>http://example.org/post/</link>
-    <description>Recent content in Posts on 锦衣の妙♂妙♂屋</description>
+    <title>Posts on 锦衣的小站</title>
+    <link>https://jinyi-x.github.io/post/</link>
+    <description>Recent content in Posts on 锦衣的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 28 Mar 2022 02:16:21 +0800</lastBuildDate><atom:link href="http://example.org/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 28 Mar 2022 02:16:21 +0800</lastBuildDate><atom:link href="https://jinyi-x.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ESP8266踩坑——复用启动引脚</title>
-      <link>http://example.org/post/esp8266_gpio/</link>
+      <link>https://jinyi-x.github.io/post/esp8266_gpio/</link>
       <pubDate>Mon, 28 Mar 2022 02:16:21 +0800</pubDate>
       
-      <guid>http://example.org/post/esp8266_gpio/</guid>
-      <description>ESP8266踩坑——复用启动引脚 前因 笔者最近在做一个项目，因为8266引脚不够用，需要复用GPIO15作为输出，期间遇到了ESP8266无限重启的鬼畜BUG，网上查阅一番发现资料几乎没有，艰难的(没有代码可以抄)完成了BUG排除，故而写下此文以防有人重蹈覆辙。  ESP8266的申必设计 可以看到本就没几个IO的ESP-12F仍需要三个GPIO来作为启动引脚，这让本就不富裕的IO雪上加霜（bushi）。当然，理论上来说这些IO都可以在启动完成之后被复用为GPIO(废话，不然为啥叫GPIO)。
+      <guid>https://jinyi-x.github.io/post/esp8266_gpio/</guid>
+      <description>前因 笔者最近在做一个项目，因为8266引脚不够用，需要复用GPIO15作为输出，期间遇到了ESP8266无限重启的鬼畜BUG，网上查阅一番发现资料几乎没有，艰难的(没有代码可以抄)完成了BUG排除，故而写下此文以防有人重蹈覆辙。  ESP8266的申必设计 可以看到本就没几个IO的ESP-12F仍需要三个GPIO来作为启动引脚，这让本就不富裕的IO雪上加霜（bushi）。当然，理论上来说这些IO都可以在启动完成之后被复用为GPIO(废话，不然为啥叫GPIO)。
 于是我们第一时间想到的代码应该是这样的：
 gpio_config_t ioConfig; ioConfig.intr_type = GPIO_INTR_DISABLE; ioConfig.mode = GPIO_MODE_OUTPUT; ioConfig,pin_bit_mask = GPIO_NUM_15; ioConfig.pull_down_en = GPIO_PULLDOWN_DISABLE; ioConfig.pull_up_en = GPIO_PULLUP_DISABLE; gpio_config(&amp;amp;ioConfig); 看起来很美好对吧，然后你写了一句:
 gpio_set_level(GPIO_NUM_15, 1); 然后你把程序下到了ESP8266里，噩梦便开始了。你会发现，你的ESP8266在不停的重复 上电-复位-上电。似乎我们漏掉了什么东西。
