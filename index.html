@@ -41,7 +41,7 @@
     <nav>
       <ul class="sidebar-nav">
         <li><a href="https://jinyi-x.github.io/">Home</a> </li>
-        <li><a href="/tags/mcu/"> [Tags]MCU开发 </a></li><li><a href="https://www.emoe.xyz/"> [友情链接]e萌工作室 </a></li><li><a href="https://github.com/jinyi-x/"> [友情链接]Github </a></li>
+        <li><a href="/tags/mcu/"> [Tags]MCU开发 </a></li><li><a href="/tags/work"> [Tags]填坑 </a></li><li><a href="/tags/sme"> [Tags]微电子 </a></li><li><a href="https://www.emoe.xyz/"> [友情链接]e萌工作室 </a></li><li><a href="https://github.com/jinyi-x/"> [友情链接]Github </a></li><li><a href="/tags"> All Tags </a></li>
       </ul>
     </nav>
 
@@ -52,6 +52,22 @@
     <main class="content container">
     <div class="posts">
 <article class="post">
+  <h1 class="post-title">
+    <a href="https://jinyi-x.github.io/post/solidphysimu/">半导体材料仿真的基本流程 Part.1 Material Studio</a>
+  </h1>
+  <time datetime="2022-03-29T15:17:58&#43;0800" class="post-date">Tue, Mar 29, 2022</time>
+  关于这篇文章 由于某君的毕设涉及到半导体仿真，而某君本人又对这方面一窍不通，故而托笔者代为仿真。 笔者也不会，但考虑到某君的毕业大计，只能硬着头皮迎战，一番学习之下做出了结果，故而将经历写下，以供后世参考。  Step.1 在Material Studio中建立晶体 某君的毕设课题是研究缺陷Si晶体的半导体性能，所以我们创建工程之后先在File-&gt;Import里导入一个Si晶胞,大概长这样:
+(P.S.:关于怎么将显示更改为球棍模型可以参考 这篇文章 )
+然后就到了折腾笔者最久的问题上了：怎么对这玩意掺杂。由于这玩意默认是周期对称的，如果此时试图用Modify-&gt;Modify Element修改一个原子(比如把Si改成Ge)，你就会得到这样的结果:
+整个晶胞都变成了Ge。在折腾半个小时之后，笔者才发现，掺杂之前需要先取消对称性，也就是将晶体点群转为P1空间群。所以在Build -&gt; Symmetry -&gt; Make P1 之后，对晶体进行掺杂，终于成功了，结果大概长这样:
+(关于空间群的内容戳这里)
+Step.2 几何优化 由于P1空间群根本不存在对称性，所以如果直接进行求解的话计算量会非常大，大到笔者的破电脑不一定能将它运行起来，我们需要对刚刚构建的缺陷晶体进行几何优化，也就是让Material Studio 自动寻找对称性。（果然对称的东西才最优雅） 打开Modules -&gt; CASETP -&gt; Calcuation，将Task设置为Geometry Optimization。就像这样:
+然后记得打开More，将Cell optimization设置为Full，就像这样：
+设置完之后就可以关闭刚刚打开的More选项卡了，然后在Calcuation选项卡中点击Run。然后泡杯茶，慢慢等它跑完吧（雾）。跑完之后打开CASTEP GeoMpt目录下后缀名为xtd的文件，应该会看到优化后的晶胞
+Step.3 开算！ 再次打开Calculation，将Task切换为Energy，并且在Properties中选中Band structure和Density State。（后面的文章中会提到，这是我们需要的参数），这一步可以把Quality设置成Fine，然后点击Run，再泡杯茶。等到跑完之后，Material Studio会自动打开一个后缀名为castep的CASTEP解算结果文件。
+只是这一堆文字看起来就很抽象，对吧（不是只有我不喜欢大段文字对吧）。我们可以打开Modules-&gt;CASTEP-&gt;Analysis，选中 Band Structure 然后点击View，然后选中Density of states进行同样的操作，然后工程下就会多俩xcd文件，一个Band Structure.xcd，一个DOS.xcd。这俩分别是能带图和态密度图。
+  
+</article><article class="post">
   <h1 class="post-title">
     <a href="https://jinyi-x.github.io/post/esp8266_gpio/">ESP8266踩坑——复用启动引脚</a>
   </h1>
