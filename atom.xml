@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>锦衣的博客</title>
+  
+  <subtitle>为什么不问问神奇海螺呢</subtitle>
+  <link href="https://jinyi-x.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://jinyi-x.github.io/"/>
+  <updated>2022-10-27T19:58:16.454Z</updated>
+  <id>https://jinyi-x.github.io/</id>
+  
+  <author>
+    <name>锦衣</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>优雅的开发STM32</title>
+    <link href="https://jinyi-x.github.io/2022/10/28/you-ya-de-kai-fa-stm32/"/>
+    <id>https://jinyi-x.github.io/2022/10/28/you-ya-de-kai-fa-stm32/</id>
+    <published>2022-10-27T19:11:58.000Z</published>
+    <updated>2022-10-27T19:58:16.454Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;如何优雅的开发STM32&quot;&gt;&lt;a href=&quot;#如何优雅的开发STM32&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="STM32" scheme="https://jinyi-x.github.io/tags/STM32/"/>
+    
+  </entry>
+  
+</feed>

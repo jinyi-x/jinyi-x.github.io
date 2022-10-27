@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>优雅的开发STM32</title>
+      <link href="/2022/10/28/you-ya-de-kai-fa-stm32/"/>
+      <url>/2022/10/28/you-ya-de-kai-fa-stm32/</url>
+      
+        <content type="html"><![CDATA[<h1 id="如何优雅的开发STM32"><a href="#如何优雅的开发STM32" class="headerlink" title="如何优雅的开发STM32"></a>如何优雅的开发STM32</h1><p>出于某些原因，我不太喜欢Keil(没钱+Keil实在是太丑了)。遂折腾使用VSCode开发STM32的姿势。折腾出来之后有几个朋友比较感兴趣，故而写个文章记录以下折腾过程</p><h2 id="1-Linux下的开发环境配置"><a href="#1-Linux下的开发环境配置" class="headerlink" title="1 Linux下的开发环境配置"></a>1 Linux下的开发环境配置</h2><h3 id="1-1-安装需要的软件"><a href="#1-1-安装需要的软件" class="headerlink" title="1.1 安装需要的软件"></a>1.1 安装需要的软件</h3><p>笔者用的Linux发行版为Ubuntu(20.04LTS)，其他的发行版可能存在一些不同，但大概差别不大吧。<br>首先，我们安装需要用到的软件包:</p><pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> ccls bear <span class="token function">make</span> arm-none-eabi-gcc gdb-multiarch openocd</code></pre><p>然后，我们需要安装软件源中没有的包，<a href="https://www.st.com/zh/development-tools/stm32cubemx.html">STM32CubeMX</a> 和 <a href="https://code.visualstudio.com/">VSCode</a>。  </p><h3 id="1-2-VSCode插件安装"><a href="#1-2-VSCode插件安装" class="headerlink" title="1.2 VSCode插件安装"></a>1.2 VSCode插件安装</h3><p>在VSCode中安装下列插件：</p><ol><li><a href="https://marketplace.visualstudio.com/items?itemName=ccls-project.ccls">ccls</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug">Cortex-Debug</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=dan-c-underwood.arm">Arm Assembly</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=trond-snekvik.gnu-mapfiles">GNU Linker Map files</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=ctanno.lst-view">lst view</a></li></ol><p><strong>注意：不要安装VSCode推荐的C和C++插件，否则容易出一些奇怪的问题</strong></p><h2 id="2-Windows下的开发环境配置"><a href="#2-Windows下的开发环境配置" class="headerlink" title="2. Windows下的开发环境配置"></a>2. Windows下的开发环境配置</h2><h3 id="2-1-安装需要的软件"><a href="#2-1-安装需要的软件" class="headerlink" title="2.1 安装需要的软件"></a>2.1 安装需要的软件</h3><p>这里我折腾了很久都没有发现纯Windows的解决方案，直到某一天，我在写一个Makefile构建的C++项目的时候修改了一下Makefile，VSCode推荐了Makefile Tools，我才发现，白折腾了，有这个就一切解决了。(Linux下不用这个是因为ccls的速度和资源开销都比Microsoft自家的插件好)。首先我们还是安装一些软件，由于Windows没有像样的包管理器，下面全部给官网链接自行下载安装：</p><ol><li><a href="https://code.visualstudio.com/">VSCode</a></li><li><a href="https://www.st.com/zh/development-tools/stm32cubemx.html">STM32CubeMX</a></li><li><a href="https://developer.arm.com/downloads/-/gnu-rm">arm-none-eabi-gcc</a></li><li><a href="https://openocd.org/">openOCD</a></li><li><a href="https://www.gnu.org/software/make/">GNU Make</a></li></ol><p><strong>注意：这里的Make OpenOCD和arm-none-eabi-gcc都需要添加到环境变量中</strong></p><h3 id="2-2-安装VSCode插件"><a href="#2-2-安装VSCode插件" class="headerlink" title="2.2 安装VSCode插件"></a>2.2 安装VSCode插件</h3><ol><li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.makefile-tools">Makefile Tools</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug">Cortex-Debug</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=dan-c-underwood.arm">Arm Assembly</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=trond-snekvik.gnu-mapfiles">GNU Linker Map files</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=ctanno.lst-view">lst view</a></li></ol><h2 id="3-Enjoy-Coding"><a href="#3-Enjoy-Coding" class="headerlink" title="3. Enjoy Coding!"></a>3. Enjoy Coding!</h2><p>我使用的工具链是基于GNU Make的，所以需要在STM32CubeMX工程类型中选择Makefile。<br>在Windows下直接用VSCode打开工程目录即可开始编写代码，如果是Linux用户，需要先执行：</p><pre class=" language-shell"><code class="language-shell">bear make -j</code></pre><p>来生成compile_commands.json给ccls提供补全。</p><p>完成效果：</p><p><img src="/images/Elegent-STM32-Dev-Preview.png" alt="Preview"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> STM32 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
